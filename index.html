@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#cfe6ff">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="کاتالوگ">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<title>کاتالوگ برنامه‌ها</title>
+<style>
+:root{--bg:#f3f8ff;--sky:#cfe6ff;--card:#fff;--tx:#14213d;--mut:#6b7a90;--bd:#e2eaf5;--pri:#1a6cf0;--pri-t:#fff;--dg:#d93025;--sh:0 6px 20px rgba(30,80,160,.12);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1319;--sky:#16243b;--card:#1a2029;--tx:#e8eef7;--mut:#8f9db1;--bd:#2a3340;--pri:#6ea8ff;--pri-t:#08162e;--dg:#f28b82;--sh:0 6px 20px rgba(0,0,0,.4);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1319;--sky:#16243b;--card:#1a2029;--tx:#e8eef7;--mut:#8f9db1;--bd:#2a3340;--pri:#6ea8ff;--pri-t:#08162e;--dg:#f28b82;--sh:0 6px 20px rgba(0,0,0,.4);color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;color:var(--tx);background:linear-gradient(180deg,var(--sky),var(--bg) 380px) no-repeat,var(--bg);font:15px/1.7 Vazirmatn,Tahoma,"Segoe UI",sans-serif;-webkit-tap-highlight-color:transparent}
+.wrap{max-width:1100px;margin:0 auto;padding:14px 16px 110px}
+.hbar{display:flex;justify-content:space-between;align-items:center}
+.loc{background:var(--card);box-shadow:var(--sh);border-radius:20px;padding:5px 16px;font-size:13px}
+h1{font-size:clamp(30px,8vw,44px);font-weight:800;text-align:center;margin:22px 0 4px;letter-spacing:-.5px}
+.sub{text-align:center;color:var(--mut);margin:0 0 20px}
+input,select,textarea,button{font:inherit;color:var(--tx)}
+input,select,textarea{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:10px 14px;width:100%}
+.bar{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;align-items:center;margin-bottom:12px}
+.bar input{border:none;box-shadow:var(--sh);border-radius:18px;padding:15px 20px;font-size:16px}
+.bar select{width:auto;flex:1;min-width:130px;border:none;box-shadow:var(--sh)}
+button{cursor:pointer;border:none;background:var(--card);box-shadow:var(--sh);border-radius:20px;padding:8px 16px;transition:transform .1s}
+button:active{transform:scale(.95)}
+button.pri{background:var(--pri);color:var(--pri-t)}
+button.dg{color:var(--dg)}
+.ib{width:42px;height:42px;padding:0;border-radius:50%;font-size:18px}
+.cats,.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:4px 2px 10px}
+.cats::-webkit-scrollbar,.chips::-webkit-scrollbar{display:none}
+.pill,.chip{flex:none;white-space:nowrap}
+.pill{padding:9px 20px}
+.chip{font-size:13px;padding:4px 14px;box-shadow:none;border:1px solid var(--bd)}
+.chip.on,.pill.on{background:var(--pri);color:var(--pri-t)}
+.count{color:var(--mut);font-size:13px;margin:4px 4px 10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px}
+.card{background:var(--card);border-radius:24px;padding:16px;display:flex;flex-direction:column;gap:10px;cursor:pointer;box-shadow:var(--sh);transition:transform .15s}
+.card:hover{transform:translateY(-3px)}
+.top{display:flex;align-items:center;gap:12px}
+.ic{width:54px;height:54px;border-radius:18px;display:grid;place-items:center;font-size:28px;flex:none}
+.nm{flex:1;font-weight:700;font-size:16px}
+.desc{color:var(--mut);font-size:13px;margin:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.card .row .pri{flex:1}
+.tg{font-size:12px;color:var(--mut)}
+.fav{width:38px;height:38px;padding:0;border-radius:50%;font-size:18px;color:var(--mut)}
+.fav.on{color:#ef4444}
+.empty{text-align:center;padding:40px;color:var(--mut)}
+.adm{display:none;background:var(--card);border:1.5px dashed var(--pri);border-radius:20px;padding:14px;margin-bottom:16px}
+body.admin .adm{display:block} .ao{display:none} body.admin .ao{display:inline-block}
+dialog{border:none;border-radius:26px 26px 0 0;background:var(--card);color:var(--tx);width:100%;max-width:600px;max-height:92vh;margin:auto auto 0;padding:22px 20px calc(22px + env(safe-area-inset-bottom,0px));box-shadow:var(--sh)}
+@media(min-width:700px){dialog{margin:auto;border-radius:26px}}
+dialog::backdrop{background:rgba(10,20,40,.5);backdrop-filter:blur(3px)}
+label{display:block;font-size:13px;color:var(--mut);margin:10px 0 3px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+textarea{min-height:80px;direction:ltr;font-family:ui-monospace,Menlo,monospace;font-size:12px}
+.toast{position:fixed;bottom:calc(96px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--tx);color:var(--bg);padding:8px 18px;border-radius:20px;opacity:0;transition:.25s;pointer-events:none;z-index:99;white-space:nowrap}
+.toast.on{opacity:1}
+ol{padding-inline-start:20px}
+.nav{position:fixed;bottom:calc(12px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);width:min(420px,92vw);display:flex;justify-content:space-around;background:var(--card);border-radius:30px;box-shadow:0 10px 30px rgba(20,50,110,.22);padding:6px;z-index:50}
+.nav button{display:flex;flex-direction:column;align-items:center;line-height:1.2;font-size:19px;background:none;box-shadow:none;padding:6px 14px;border-radius:22px}
+.nav button span{font-size:10px;color:var(--mut)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hbar"><button class="ib" id="themeBtn">🌓</button><span class="loc">📦 کتابخانه برنامه‌ها</span><button class="ib" id="admBtn">⚙️</button></div>
+  <h1>کاتالوگ برنامه‌ها</h1>
+  <p class="sub">جستجو کنید، دسته و برچسب را انتخاب کنید و هر مورد را به گوشی‌تان اضافه کنید.</p>
+
+  <div id="draftBar" class="adm" style="display:none;border-style:solid;margin-bottom:12px">⚠️ پیش‌نویس محلی شما نمایش داده می‌شود، نه <code>index.json</code> ریپو. <button class="dg" id="drDel" style="margin-top:6px">حذف پیش‌نویس</button></div>
+  <div class="adm">
+    <div class="row">
+      <button class="pri" id="newBtn">➕ آیتم جدید</button>
+      <button id="expBtn">📤 خروجی index.json</button>
+      <button id="impBtn">📥 درون‌ریزی JSON</button>
+      <button class="dg" id="rstBtn">حذف پیش‌نویس</button>
+    </div>
+    <p class="tg" style="margin:8px 0 0">تغییرات در مرورگر شما ذخیره می‌شود. برای انتشار: «خروجی index.json» را کپی کنید، در ریپوی گیت فایل index.json را با آن جایگزین و Commit کنید، سپس «حذف پیش‌نویس» را بزنید.</p>
+  </div>
+
+  <div class="bar">
+    <input id="q" type="search" placeholder="جستجو در نام، توضیح و برچسب…">
+    <select id="cat" hidden></select>
+    <select id="sort"><option value="feat">ویژه‌ها</option><option value="new">جدیدترین</option><option value="az">الفبایی</option></select>
+    <button id="favF">⭐ علاقه‌مندی‌ها</button>
+  </div>
+  <div class="cats" id="catRow"></div>
+  <div class="chips" id="chips"></div>
+  <div class="count" id="count"></div>
+  <div class="grid" id="grid"></div>
+</div>
+
+<nav class="nav"><button data-n="home">🏠<span>خانه</span></button><button data-n="search">🔍<span>جستجو</span></button><button data-n="fav">♥<span>علاقه‌ها</span></button><button data-n="adm">⚙️<span>مدیریت</span></button></nav>
+<dialog id="dView"></dialog>
+
+<dialog id="dEdit">
+  <h3 id="eTitle" style="margin:0">آیتم</h3>
+  <div class="two"><div><label>نام</label><input id="fName"></div><div><label>شناسه (slug لاتین)</label><input id="fSlug" dir="ltr"></div></div>
+  <div class="two"><div><label>دسته</label><input id="fCat" list="cats"><datalist id="cats"></datalist></div><div><label>آیکون (ایموجی)</label><input id="fIcon" maxlength="4"></div></div>
+  <label>برچسب‌ها (با ویرگول جدا کنید)</label><input id="fTags">
+  <label>توضیح</label><input id="fDesc">
+  <div class="two"><div><label>آدرس باز کردن (URL)</label><input id="fUrl" dir="ltr" placeholder="https://…"></div><div><label>رنگ</label><input id="fColor" type="color" style="padding:2px;height:40px"></div></div>
+  <label><input id="fFeat" type="checkbox" style="width:auto"> ویژه (Featured)</label>
+  <label>پیش‌نمایش manifest همین آیتم</label><textarea id="fMan" readonly></textarea>
+  <div class="row" style="margin-top:14px"><button class="pri" id="saveBtn">ذخیره</button><button id="cancelBtn">انصراف</button></div>
+</dialog>
+
+<dialog id="dJson">
+  <h3 style="margin:0" id="jTitle">JSON</h3>
+  <textarea id="jText" style="min-height:260px;margin-top:10px"></textarea>
+  <div class="row" style="margin-top:12px"><button class="pri" id="jOk">کپی</button><button id="jClose">بستن</button></div>
+</dialog>
+
+<dialog id="dInst">
+  <h3 style="margin:0">افزودن به صفحه اصلی گوشی</h3>
+  <p><b>iPhone / iPad (Safari)</b></p>
+  <ol><li>دکمه Share را بزنید</li><li>گزینه «Add to Home Screen» را انتخاب کنید</li><li>روی Add بزنید</li></ol>
+  <p><b>Android (Chrome)</b></p>
+  <ol><li>منوی ⋮ را باز کنید</li><li>«Install app» یا «Add to Home screen» را بزنید</li></ol>
+  <button id="iClose" class="pri">متوجه شدم</button>
+</dialog>
+<div class="toast" id="toast"></div>
+
+<script>
+const SEED=[
+{slug:"leitner",name:"فلش‌کارت و لایتنر",cat:"آموزش",tags:["لغت","لایتنر","زبان"],desc:"یادگیری لغت انگلیسی و عربی با روش جعبه لایتنر.",icon:"🧠",color:"#7c4dff",url:"https://parkparki-hue.github.io/leitner/",feat:true,date:"2026-10-21"},
+{slug:"habits",name:"ردیاب عادت‌ها",cat:"آموزش",tags:["عادت","روزانه","آمار"],desc:"ثبت عادت‌های روزانه با زنجیره پیاپی و نقشه فعالیت.",icon:"🔥",color:"#ef6c00",url:"",feat:true,date:"2026-10-21"},
+{slug:"docs",name:"ویرایشگر اسناد",cat:"اسناد",tags:["متن","ویرایش","همکاری"],desc:"نوشتن و ویرایش اسناد متنی به‌صورت آنلاین.",icon:"📄",color:"#4285f4",url:"",feat:true,date:"2026-10-01"},
+{slug:"sheets",name:"جدول‌ها",cat:"اسناد",tags:["جدول","محاسبه"],desc:"صفحه‌گسترده با فرمول و نمودار.",icon:"📊",color:"#0f9d58",url:"",feat:true,date:"2026-10-05"},
+{slug:"maps",name:"نقشه و مسیریاب",cat:"ابزارها",tags:["نقشه","سفر"],desc:"مسیریابی و جستجوی مکان‌ها.",icon:"🗺️",color:"#ea4335",url:"",feat:true,date:"2026-09-20"},
+{slug:"photos",name:"آلبوم تصاویر",cat:"رسانه",tags:["عکس","گالری"],desc:"مرتب‌سازی و مرور عکس‌ها.",icon:"🖼️",color:"#f4b400",url:"",feat:true,date:"2026-10-12"},
+{slug:"calendar",name:"تقویم",cat:"ابزارها",tags:["زمان","یادآوری"],desc:"برنامه‌ریزی رویدادها و یادآوری‌ها.",icon:"📅",color:"#4285f4",url:"",feat:false,date:"2026-08-15"},
+{slug:"player",name:"پخش‌کننده صوت",cat:"رسانه",tags:["موسیقی","صوت"],desc:"پخش فایل‌های صوتی و پادکست.",icon:"🎧",color:"#9334e6",url:"",feat:false,date:"2026-10-18"},
+{slug:"notes",name:"یادداشت سریع",cat:"ابزارها",tags:["متن","یادداشت"],desc:"ثبت سریع یادداشت‌ها بدون ورود.",icon:"📝",color:"#fbbc04",url:"",feat:false,date:"2026-07-30"},
+{slug:"reader",name:"کتاب‌خوان",cat:"اسناد",tags:["کتاب","pdf"],desc:"خواندن فایل‌های PDF و کتاب‌ها.",icon:"📚",color:"#e8710a",url:"",feat:false,date:"2026-09-02"}];
+const $=s=>document.querySelector(s);
+const norm=s=>(s||"").toLowerCase().replace(/ي/g,"ی").replace(/ك/g,"ک");
+let items=[],draft=load("draft",null),favs=load("favs",[]),selTags=new Set(),favOnly=false,editing=null,deferred=null;
+function load(k,d){try{const v=localStorage.getItem("cms2_"+k);return v?JSON.parse(v):d}catch(e){return d}}
+function save(k,v){try{localStorage.setItem("cms_"+k,JSON.stringify(v))}catch(e){}}
+function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("on");setTimeout(()=>e.classList.remove("on"),1800)}
+function esc(s){return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+const bg=c=>c+"26";
+
+function filtered(){
+  const q=norm($("#q").value.trim()),cat=$("#cat").value;
+  let r=items.filter(i=>(cat==="__all"||cat==="__feat"&&i.feat||i.cat===cat)
+    &&(!favOnly||favs.includes(i.slug))
+    &&[...selTags].every(t=>i.tags.includes(t))
+    &&(!q||norm([i.name,i.desc,i.cat,...i.tags].join(" ")).includes(q)));
+  const s=$("#sort").value;
+  if(s==="new")r.sort((a,b)=>b.date.localeCompare(a.date));
+  else if(s==="az")r.sort((a,b)=>a.name.localeCompare(b.name,"fa"));
+  else r.sort((a,b)=>b.feat-a.feat);
+  return r;
+}
+function renderFilters(){
+  const cur=$("#cat").value||"__feat",cats=[...new Set(items.map(i=>i.cat))];
+  $("#cat").innerHTML='<option value="__feat">ویژه</option><option value="__all">همه</option>'+cats.map(c=>`<option>${esc(c)}</option>`).join("");
+  $("#cat").value=[...$("#cat").options].some(o=>o.value===cur)?cur:"__all";
+  $("#catRow").innerHTML=[...$("#cat").options].map(o=>`<button class="pill ${o.value===$("#cat").value?"on":""}" data-v="${esc(o.value)}">${esc(o.textContent)}</button>`).join("");
+  $("#cats").innerHTML=cats.map(c=>`<option value="${esc(c)}">`).join("");
+  const tags=[...new Set(items.flatMap(i=>i.tags))].sort();
+  $("#chips").innerHTML=tags.map(t=>`<button class="chip ${selTags.has(t)?"on":""}" data-t="${esc(t)}">#${esc(t)}</button>`).join("");
+}
+function render(){
+  const r=filtered();
+  $("#count").textContent=r.length+" مورد";
+  $("#grid").innerHTML=r.length?r.map(i=>`<div class="card" data-s="${esc(i.slug)}">
+    <div class="top"><div class="ic" style="background:${bg(i.color)}">${esc(i.icon)}</div><div class="nm">${esc(i.name)}</div>
+    <button class="fav ${favs.includes(i.slug)?"on":""}" data-a="fav" title="علاقه‌مندی">♥</button></div>
+    <p class="desc">${esc(i.desc)}</p>
+    <div class="tg">${i.tags.map(t=>"#"+esc(t)).join(" ")}</div>
+    <div class="row"><button class="pri" data-a="inst">⬇ افزودن به گوشی</button><button data-a="open">↗ باز کردن</button>
+    <span class="ao"><button data-a="edit">✏️</button> <button class="dg" data-a="del">🗑</button></span></div></div>`).join("")
+    :`<div class="empty" style="grid-column:1/-1">نتیجه‌ای پیدا نشد.<br>می‌توانید این مورد را از ما درخواست کنید.</div>`;
+}
+function refresh(){renderFilters();render()}
+
+function manifest(i){return{name:i.name,short_name:i.name.slice(0,12),start_url:"/app/"+i.slug+"/",scope:"/app/"+i.slug+"/",display:"standalone",lang:"fa",dir:"rtl",background_color:"#ffffff",theme_color:i.color,description:i.desc,icons:[{src:"/items/"+i.slug+"/icon-512.png",sizes:"512x512",type:"image/png",purpose:"any"},{src:"/items/"+i.slug+"/icon-maskable.png",sizes:"512x512",type:"image/png",purpose:"maskable"}]}}
+
+function install(i){if(i&&i.url){window.open(i.url,"_blank","noopener");toast("در صفحه برنامه، دکمه نصب را بزنید")}else $("#dInst").showModal()}
+function openItem(i){if(i.url)window.open(i.url,"_blank","noopener");else toast("آدرسی برای این مورد ثبت نشده")}
+function showView(i){
+  const d=$("#dView");
+  d.innerHTML=`<div class="top"><div class="ic" style="background:${bg(i.color)}">${esc(i.icon)}</div><div class="nm" style="font-size:18px">${esc(i.name)}</div></div>
+  <p>${esc(i.desc)}</p><p class="tg">دسته: ${esc(i.cat)}<br>${i.tags.map(t=>"#"+esc(t)).join(" ")}<br>به‌روزرسانی: ${esc(i.date)}</p>
+  <div class="row"><button class="pri" id="vInst">⬇ افزودن به گوشی</button><button id="vOpen">↗ باز کردن</button><button id="vCopy">🔗 کپی لینک</button><button id="vClose">بستن</button></div>`;
+  d.showModal();
+  $("#vInst").onclick=()=>install(i);$("#vOpen").onclick=()=>openItem(i);$("#vClose").onclick=()=>d.close();
+  $("#vCopy").onclick=()=>{const l=location.href.split("#")[0]+"#"+i.slug;(navigator.clipboard?navigator.clipboard.writeText(l):Promise.reject()).then(()=>toast("لینک کپی شد"),()=>toast(l))};
+  try{history.replaceState(null,"","#"+i.slug)}catch(e){}
+}
+
+function openEdit(i){
+  editing=i||null;const x=i||{slug:"",name:"",cat:"",tags:[],desc:"",icon:"📦",color:"#1a73e8",url:"",feat:false};
+  $("#eTitle").textContent=i?"ویرایش آیتم":"آیتم جدید";
+  $("#fName").value=x.name;$("#fSlug").value=x.slug;$("#fCat").value=x.cat;$("#fIcon").value=x.icon;
+  $("#fTags").value=x.tags.join("، ");$("#fDesc").value=x.desc;$("#fUrl").value=x.url;$("#fColor").value=x.color;$("#fFeat").checked=x.feat;
+  updMan();$("#dEdit").showModal();
+}
+function readForm(){
+  const name=$("#fName").value.trim();
+  return{slug:($("#fSlug").value.trim()||name).toLowerCase().replace(/[^a-z0-9\u0600-\u06ff]+/g,"-").replace(/^-|-$/g,""),
+    name,cat:$("#fCat").value.trim()||"عمومی",icon:$("#fIcon").value||"📦",color:$("#fColor").value,
+    tags:$("#fTags").value.split(/[,،]/).map(s=>s.trim()).filter(Boolean),desc:$("#fDesc").value.trim(),
+    url:$("#fUrl").value.trim(),feat:$("#fFeat").checked,date:editing?editing.date:new Date().toISOString().slice(0,10)};
+}
+function updMan(){$("#fMan").value=JSON.stringify(manifest(readForm()),null,2)}
+document.querySelectorAll("#dEdit input").forEach(e=>e.addEventListener("input",updMan));
+$("#saveBtn").onclick=()=>{
+  const n=readForm();if(!n.name)return toast("نام الزامی است");
+  if(items.some(i=>i.slug===n.slug&&i!==editing))return toast("این شناسه تکراری است");
+  if(editing)items[items.indexOf(editing)]=n;else items.unshift(n);
+  save("draft",items);$("#dEdit").close();refresh();toast("ذخیره شد");
+};
+$("#cancelBtn").onclick=()=>$("#dEdit").close();
+
+function jsonDlg(title,text,okLabel,fn){
+  $("#jTitle").textContent=title;$("#jText").value=text;$("#jText").readOnly=!fn;$("#jOk").textContent=okLabel;
+  $("#jOk").onclick=fn||(()=>{$("#jText").select();(navigator.clipboard?navigator.clipboard.writeText($("#jText").value):Promise.reject()).then(()=>toast("کپی شد"),()=>document.execCommand("copy")&&toast("کپی شد"))});
+  $("#dJson").showModal();
+}
+$("#expBtn").onclick=()=>jsonDlg("index.json",JSON.stringify(items,null,2),"کپی");
+$("#impBtn").onclick=()=>jsonDlg("درون‌ریزی JSON","","جایگزین کن",()=>{
+  try{const v=JSON.parse($("#jText").value);if(!Array.isArray(v))throw 0;
+    items=v.map(i=>({slug:i.slug,name:i.name,cat:i.cat||"عمومی",tags:i.tags||[],desc:i.desc||"",icon:i.icon||"📦",color:i.color||"#1a73e8",url:i.url||"",feat:!!i.feat,date:i.date||""}));
+    save("draft",items);$("#dJson").close();refresh();toast("درون‌ریزی شد")}catch(e){toast("JSON نامعتبر است")}});
+$("#jClose").onclick=()=>$("#dJson").close();
+$("#rstBtn").onclick=delDraft;
+$("#newBtn").onclick=()=>openEdit();
+$("#iClose").onclick=()=>$("#dInst").close();
+
+$("#grid").addEventListener("click",e=>{
+  const c=e.target.closest(".card");if(!c)return;
+  const i=items.find(x=>x.slug===c.dataset.s),a=e.target.closest("[data-a]")?.dataset.a;
+  if(a==="fav"){favs=favs.includes(i.slug)?favs.filter(s=>s!==i.slug):[...favs,i.slug];save("favs",favs);render()}
+  else if(a==="inst")install(i);else if(a==="open")openItem(i);else if(a==="edit")openEdit(i);
+  else if(a==="del"){if(sure("d"+i.slug,"حذف «"+i.name+"»")){items=items.filter(x=>x!==i);save("draft",items);refresh()}}
+  else showView(i);
+});
+$("#chips").addEventListener("click",e=>{const t=e.target.dataset.t;if(!t)return;selTags.has(t)?selTags.delete(t):selTags.add(t);refresh()});
+["#q","#cat","#sort"].forEach(s=>$(s).addEventListener("input",render));
+$("#favF").onclick=e=>{favOnly=!favOnly;e.currentTarget.classList.toggle("pri",favOnly);render()};
+$("#admBtn").onclick=()=>{document.body.classList.toggle("admin");$("#admBtn").classList.toggle("pri")};
+$("#themeBtn").onclick=()=>{const r=document.documentElement,dark=getComputedStyle(r).colorScheme==="dark"||r.dataset.theme==="dark";r.dataset.theme=dark?"light":"dark"};
+
+let arm=null;
+function sure(k,m){if(arm===k)return true;arm=k;toast(m+" — دوباره بزنید");setTimeout(()=>{if(arm===k)arm=null},3000);return false}
+$("#catRow").addEventListener("click",e=>{const v=e.target.dataset.v;if(v==null)return;$("#cat").value=v;refresh()});
+$(".nav").addEventListener("click",e=>{const n=e.target.closest("button")?.dataset.n;if(!n)return;
+  if(n==="fav")$("#favF").click();else if(n==="adm")$("#admBtn").click();
+  else{window.scrollTo({top:0,behavior:"smooth"});if(n==="search")$("#q").focus();else if(favOnly)$("#favF").click()}});
+function delDraft(){try{localStorage.removeItem("cms2_draft")}catch(e){}location.reload()}
+$("#drDel").onclick=delDraft;
+async function boot(){
+  let d=null;try{const r=await fetch("index.json",{cache:"no-cache"});if(r.ok)d=await r.json()}catch(e){}
+  if(Array.isArray(draft)&&draft.length){items=draft;$("#draftBar").style.display="block"}
+  else items=Array.isArray(d)&&d.length?d:SEED;
+  refresh();
+  const h=location.hash.slice(1);if(h){const i=items.find(x=>x.slug===decodeURIComponent(h));if(i)showView(i)}
+}
+boot();
+if("serviceWorker"in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+</script>
+</body>
+</html>
