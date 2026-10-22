@@ -1,0 +1,50 @@
+[
+  {
+    "slug": "ham",
+    "name": "همیار",
+    "cat": "آموزش",
+    "icon": "📦",
+    "color": "#e51ce9",
+    "tags": [
+      "ایران",
+      "تهران"
+    ],
+    "desc": "",
+    "url": "https://hamyar.me/",
+    "feat": false,
+    "draft": false,
+    "img": "assets/icons/ham.png",
+    "date": "2026-10-22"
+  },
+  {
+    "slug": "app-madreseh",
+    "name": "اپ مدرسه",
+    "cat": "آموزش",
+    "tags": [
+      "آموزش",
+      "مدرسه"
+    ],
+    "desc": "یادگیری",
+    "icon": "📦",
+    "color": "#2b8e10",
+    "url": "https://parkparki-hue.github.io/app-madreseh/",
+    "feat": true,
+    "date": "2026-10-21"
+  },
+  {
+    "slug": "leitner",
+    "name": "فلش‌کارت و لایتنر",
+    "cat": "آموزش",
+    "tags": [
+      "لغت",
+      "لایتنر",
+      "زبان"
+    ],
+    "desc": "یادگیری لغت انگلیسی و عربی با روش جعبه لایتنر.",
+    "icon": "🧠",
+    "color": "#7c4dff",
+    "url": "https://parkparki-hue.github.io/leitner/",
+    "feat": true,
+    "date": "2026-10-21"
+  }
+]
