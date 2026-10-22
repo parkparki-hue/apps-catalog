@@ -1,15 +1,31 @@
 [
   {
+    "slug": "ham",
+    "name": "همیار",
+    "cat": "آموزش",
+    "icon": "📦",
+    "color": "#e51ce9",
+    "tags": [
+      "ایران",
+      "تهران"
+    ],
+    "desc": "",
+    "url": "https://hamyar.me/",
+    "feat": false,
+    "draft": false,
+    "date": "2026-10-22"
+  },
+  {
     "slug": "app-madreseh",
     "name": "اپ مدرسه",
     "cat": "آموزش",
-    "icon": "📦",
-    "color": "#2b8e10",
     "tags": [
       "آموزش",
       "مدرسه"
     ],
     "desc": "یادگیری",
+    "icon": "📦",
+    "color": "#2b8e10",
     "url": "https://parkparki-hue.github.io/app-madreseh/",
     "feat": true,
     "date": "2026-10-21"
